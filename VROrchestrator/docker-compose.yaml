@@ -1,0 +1,17 @@
+﻿version: '3.7'
+
+services:
+  orchestrator:
+    container_name: vrorchestrator
+    build: .
+    environment:
+      VROrchestrator_VRPersistenceClientSettings__Endpoint: "${VROrchestrator_VRPersistenceClientSettings__Endpoint}"
+      VROrchestrator_VRScraperClientSettings__Endpoint: "${VROrchestrator_VRScraperClientSettings__Endpoint}"
+      VROrchestrator_VRNotifierClientSettings__Endpoint: "${VROrchestrator_VRNotifierClientSettings__Endpoint}"
+      VROrchestrator_VROrchestratorServiceSettings__ScrapeIntervalMinutes: "${VROrchestrator_VROrchestratorServiceSettings__ScrapeIntervalMinutes}"
+    networks:
+      - vr
+
+networks:
+  vr:
+    name: custom_vr
