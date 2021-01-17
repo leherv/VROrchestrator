@@ -30,6 +30,8 @@ namespace VROrchestrator
                     services.AddHttpClient<IVRPersistenceClient, VRPersistenceClient>(selfServiceClient =>
                     {
                         selfServiceClient.BaseAddress = new Uri(vrPersistenceClientSettings.Endpoint);
+                        if (vrPersistenceClientSettings.TimeoutSeconds != 0)
+                            selfServiceClient.Timeout = TimeSpan.FromSeconds(vrPersistenceClientSettings.TimeoutSeconds);
                     });
                     
                     var vrScraperClientSettings = hostContext.Configuration
@@ -38,6 +40,8 @@ namespace VROrchestrator
                     services.AddHttpClient<IVRScraperClient, VRScraperClient>(selfServiceClient =>
                     {
                         selfServiceClient.BaseAddress = new Uri(vrScraperClientSettings.Endpoint);
+                        if (vrScraperClientSettings.TimeoutSeconds != 0)
+                            selfServiceClient.Timeout = TimeSpan.FromSeconds(vrScraperClientSettings.TimeoutSeconds);
                     });
                     
                     var vrNotifierClientSettings = hostContext.Configuration
@@ -46,6 +50,8 @@ namespace VROrchestrator
                     services.AddHttpClient<IVRNotifierClient, VRNotifierClient>(selfServiceClient =>
                     {
                         selfServiceClient.BaseAddress = new Uri(vrNotifierClientSettings.Endpoint);
+                        if (vrNotifierClientSettings.TimeoutSeconds != 0)
+                            selfServiceClient.Timeout = TimeSpan.FromSeconds(vrNotifierClientSettings.TimeoutSeconds);
                     });
 
                     services.Configure<VROrchestratorServiceSettings>(
