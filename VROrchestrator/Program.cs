@@ -21,7 +21,7 @@ namespace VROrchestrator
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((context, config) => config.AddEnvironmentVariables("VROrchestrator_"))
+                .ConfigureAppConfiguration((context, config) => config.AddEnvironmentVariables("VRORCHESTRATOR_"))
                 .ConfigureServices((hostContext, services) =>
                 {
                     var vrPersistenceClientSettings = hostContext.Configuration

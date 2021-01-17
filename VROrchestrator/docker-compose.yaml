@@ -5,10 +5,10 @@ services:
     container_name: vrorchestrator
     build: .
     environment:
-      VROrchestrator_VRPersistenceClientSettings__Endpoint: "${VROrchestrator_VRPersistenceClientSettings__Endpoint}"
-      VROrchestrator_VRScraperClientSettings__Endpoint: "${VROrchestrator_VRScraperClientSettings__Endpoint}"
-      VROrchestrator_VRNotifierClientSettings__Endpoint: "${VROrchestrator_VRNotifierClientSettings__Endpoint}"
-      VROrchestrator_VROrchestratorServiceSettings__ScrapeIntervalMinutes: "${VROrchestrator_VROrchestratorServiceSettings__ScrapeIntervalMinutes}"
+      VRORCHESTRATOR_VRPERSISTENCECLIENTSETTINGS__ENDPOINT: "${VRORCHESTRATOR_VRPERSISTENCECLIENTSETTINGS__ENDPOINT}"
+      VRORCHESTRATOR_VRSCRAPERCLIENTSETTINGS__ENDPOINT: "${VRORCHESTRATOR_VRSCRAPERCLIENTSETTINGS__ENDPOINT}"
+      VRORCHESTRATOR_VRNOTIFIERCLIENTSETTINGS__ENDPOINT: "${VRORCHESTRATOR_VRNOTIFIERCLIENTSETTINGS__ENDPOINT}"
+      VRORCHESTRATOR_VRORCHESTRATORCLIENTSETTINGS__ENDPOINT: "${VRORCHESTRATOR_VRORCHESTRATORCLIENTSETTINGS__ENDPOINT}"
     networks:
       - vr
 
