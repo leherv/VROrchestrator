@@ -56,14 +56,14 @@ namespace VROrchestrator.Services
 
         private async Task ExecuteAsync()
         {
-            _logger.LogInformation("Starting scraping");
+            _logger.LogInformation("Starting scraping...");
             var scrapeResult = await _vrScraperClient.Scrape(ScrapeInstructionsDto);
             if (scrapeResult.IsFailure)
             {
                 _logger.LogError("Scraping failed due to: {message}", scrapeResult.Error);
                 return;
             }
-            
+            _logger.LogInformation("Scraping successful.");
             var scrapeResults = scrapeResult.Value;
             var successfulScrapeResults = scrapeResults
                 .Where(result => result.IsSuccess)
@@ -79,7 +79,7 @@ namespace VROrchestrator.Services
             }
 
             var persistResults = persistResult.Value;
-            // select only those scrapeResults that where successfully persisted and use the scrape infor
+            // select only those scrapeResults that where successfully persisted and use the scrape info
             var successFullyPersistedScrapeResults = successfulScrapeResults.Zip(persistResults)
                 .Where(tuple => tuple.Second.IsSuccess)
                 .Select(tuple => tuple.First);
@@ -106,7 +106,8 @@ namespace VROrchestrator.Services
                     successFullyPersistedScrapeResult.ReleaseNumber,
                     successFullyPersistedScrapeResult.SubReleaseNumber,
                     successFullyPersistedScrapeResult.Url,
-                    subscribedEndpointsResult.Value.Value.Select(n => n.Identifier).ToList()));
+                    subscribedEndpointsResult.Value.Value.Select(n => n.Identifier).ToList(),
+                    successFullyPersistedScrapeResult.MediaName.ToLower()));
 
                 if (notifyResult.IsFailure)
                     _logger.LogError("Notifying endpoints for new release of media {mediaName} failed due to {message}", successFullyPersistedScrapeResult?.MediaName, subscribedEndpointsResult.Error);
@@ -136,14 +137,14 @@ namespace VROrchestrator.Services
                 scrapeResult.Url)).ToList());
         }
 
-        private NotificationDTO BuildNotificationDTO(int chapterNumber, int subChapterNumber, string url, List<string> notificationEndpointIdentifiers)
+        private NotificationDTO BuildNotificationDTO(int chapterNumber, int subChapterNumber, string url, List<string> notificationEndpointIdentifiers, string mediaName)
         {
             var message = $"Chapter {chapterNumber.ToString()}";
             message += subChapterNumber > 0
                 ? $".{subChapterNumber.ToString()} "
                 : " ";
             message += $"is here! Check it out at: {url}";
-            return new NotificationDTO(message, notificationEndpointIdentifiers);
+            return new NotificationDTO(message, notificationEndpointIdentifiers, mediaName);
         }
     }
 }
