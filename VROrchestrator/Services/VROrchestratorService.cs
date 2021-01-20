@@ -84,7 +84,7 @@ namespace VROrchestrator.Services
                 .Where(tuple => tuple.Second.IsSuccess)
                 .Select(tuple => tuple.First);
             
-            _logger.LogInformation("");
+            _logger.LogInformation("Finished persisting scrape results.");
             
             foreach (var successFullyPersistedScrapeResult in successFullyPersistedScrapeResults)
             {
