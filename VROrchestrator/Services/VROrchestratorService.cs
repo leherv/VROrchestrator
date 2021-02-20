@@ -11,8 +11,8 @@ using VROrchestrator.Config;
 using VROrchestrator.DTO;
 using VROrchestrator.DTO.VRNotifier;
 using VROrchestrator.DTO.VRPersistence;
-using VROrchestrator.HttpClients;
 using VROrchestrator.HttpClients.VRNotifier;
+using VROrchestrator.HttpClients.VRScraper;
 
 namespace VROrchestrator.Services
 {

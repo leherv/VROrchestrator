@@ -58,7 +58,6 @@ namespace VROrchestrator
                         hostContext.Configuration.GetSection(nameof(VROrchestratorServiceSettings)));
                     services.Configure<TrackedMediaSettings>(
                         hostContext.Configuration.GetSection(nameof(TrackedMediaSettings)));
-                    services.AddSingleton<VROrchestratorService>();
                     services.AddHostedService<VROrchestratorService>();
                 });
     }

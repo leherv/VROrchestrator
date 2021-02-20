@@ -4,7 +4,7 @@ using CSharpFunctionalExtensions;
 using VRNotifier.Extensions;
 using VROrchestrator.DTO;
 
-namespace VROrchestrator.HttpClients
+namespace VROrchestrator.HttpClients.VRScraper
 {
     public interface IVRScraperClient
     {
